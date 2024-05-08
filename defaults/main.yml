@@ -1,2 +1,20 @@
 ---
 # defaults file for hammadrauf.ansible-role-apache2
+users:
+  - username: "{{ vault_vmuser1 }}"
+    password: "{{ vault_vmpwd1 }}"
+  - username: "{{ vault_vmuser2 }}"
+    password: "{{ vault_vmpwd2 }}"
+
+virtualhosts:
+  - directory: "/var/www/html"
+    contextroot: "/"
+    domainname: "www.abc.net"
+    port80: true
+    port443: true
+    port80redirect: true
+    ssl_enabled: true
+    ssl_self_signed: false
+    ssl_certbot: true
+    
+
