@@ -1,0 +1,11 @@
+---
+driver:
+  name: default
+platforms:
+  - name: debian12
+    image: dockerhub.io/debian:bookworm
+  - name: rhel8
+    image: dockerhub.io/roboxes/rhel8
+  - name: ubuntu
+    image: dockerhub.io/ubuntu:noble
+

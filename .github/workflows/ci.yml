@@ -10,7 +10,7 @@ name: CI
 
 defaults:
   run:
-    working-directory: 'hammadrauf.ansible-role-apache2'
+    working-directory: 'ansible-role-apache2'
 
 jobs:
 
@@ -21,7 +21,7 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v4
         with:
-          path: 'hammadrauf.ansible-role-apache2'
+          path: 'ansible-role-apache2'
 
       - name: Set up Python 3.
         uses: actions/setup-python@v5

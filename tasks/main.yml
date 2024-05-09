@@ -16,8 +16,8 @@
         - "./vars/os_specific_default.yml"    
 
   tasks:
-    - name: Create Super User 1
-      user:
+    - name: Repeat createuser block with loop
+      ansible.builtin.include_tasks: createuser.yml
         name: "{{ vmuser1 }}"
         password: "{{ vmpwd1 }}"
         create_home: true

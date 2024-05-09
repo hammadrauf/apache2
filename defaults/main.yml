@@ -16,5 +16,4 @@ virtualhosts:
     ssl_enabled: true
     ssl_self_signed: false
     ssl_certbot: true
-    
 
