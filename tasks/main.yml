@@ -1,12 +1,5 @@
 ---
 # tasks file for hammadrauf.ansible-role-apache2
-- name: Play - Create 2 Super Users 
-  hosts: all
-  vars_files:
-    - ./vars/vars.yml
-    - ./vars/secrets.yml
-  become: true
-
   pre_tasks:
     - debug: var=ansible_os_family
     - name: Load OS specific Vars file

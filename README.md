@@ -25,6 +25,7 @@ Example Playbook
     - hosts: servers
       roles:
          - { role: hammadrauf.ansible-role-apache2 }
+```
 
 License
 -------
