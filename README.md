@@ -6,7 +6,7 @@ This role installs Apache2 or HTTPD on Debian based OS. RHEL based OS are also s
 Requirements
 ------------
 
-Any Debian or RHEL based Virtual Machine or Physical server where the Ansible user has SUDO permissions.
+Any Debian or RHEL based Virtual Machine or Physical server where the Ansible user has SUDO permissions, and python3 is installed.
 
 Role Variables
 --------------
@@ -29,10 +29,11 @@ Example Playbook
 
 Testing with Molecule
 ---------------------
-Launch Docker instances outside of Molecule/Ansible by using the following commands:
+Launch Podman instances outside of Molecule/Ansible by using the following commands:
 ```
-docker run -d --name rhel8 --hostname rhel8 -it docker.io/roboxes/rhel8 sleep infinity & wait
-docker run -d --name debian12 --hostname debian12 -it docker.io/hammadrauf/dockerdeb12:latest sleep infinity & wait
+podman run -d --name debian12 --hostname debian12 -it docker.io/hammadrauf/dockerdeb12:latest sleep infinity & wait
+podman run -d --name fedora40 --hostname fedora40 -it docker.io/hammadrauf/fedora40:latest
+podman run -d --name ubuntu --hostname ubuntu -it docker.io/hammadrauf/ubuntunoble:latest sleep infinity & wait
 ```
 
 License

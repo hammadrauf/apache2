@@ -3,13 +3,13 @@ driver:
   name: default
   options:
     managed: false
-    login_cmd_template: 'docker exec -ti {instance} bash'
+    login_cmd_template: 'podman exec -ti {instance} bash'
     ansible_connection_options:
-      ansible_connection: docker
+      ansible_connection: podman
 platforms:
   - name: debian12
     image: docker.io/hammadrauf/debian12:latest
-  - name: rhel8
-    image: docker.io/roboxes/rhel8
-# - name: ubuntu
-#   image: docker.io/ubuntu:noble
+  - name: fedora40
+    image: docker.io/hammadrauf/fedora40:latest
+  - name: ubuntu
+    image: docker.io/hammadrauf/ubuntunoble:latest
