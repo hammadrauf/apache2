@@ -5,7 +5,7 @@
   include_vars: "{{ item }}"
   with_first_found:
     - "os_specific_{{ ansible_os_family }}.yml"
-    - "os_specific_default.yml"    
+    - "os_specific_default.yml"
 
 - name: Include secrets.yml
   include_vars: "secrets.yml"
@@ -15,12 +15,6 @@
   with_items:
     - "{{ users }}"
 
-# - name: Play - Install Apache
-  # vars_files:
-  #   - ./vars/vars.yml
-  #   - ./vars/secrets.yml
-  # remote_user: "{{ vmuser1 }}"
-
 - name: Install package Apache
   package:
     name: "{{ vapache }}"
@@ -28,13 +22,13 @@
   become: true
 
 - name: Enable the Apache Service, if not already done so
-  service: 
+  service:
     name: "{{ vapache_service }}"
     enabled: true
   become: true
 
 - name: Start the Apache Service, if not already done so
-  service: 
+  service:
     name: "{{ vapache_service }}"
     state: started
   become: true
@@ -49,7 +43,7 @@
     removes: "{{ vapache_default_content }}/index.html"
   become: true
   when: apc.stat.exists
-  
+
 - name: Copy the included index.html from Host to remote in the Apache Default Content folder
   copy:
     src: index.html
@@ -58,7 +52,7 @@
     group: "{{ vapache_group }}"
     mode: '0644'
   become: true
-  when: apc.stat.exists      
+  when: apc.stat.exists
 
 - name: Copy the included site_styles.css from Host to remote in the Apache Default Content folder
   copy:
@@ -81,7 +75,7 @@
   when: apc.stat.exists
 
 - name: Re-Start the Apache Service.
-  service: 
+  service:
     name: "{{ vapache_service }}"
     state: restarted
   become: true
@@ -89,16 +83,16 @@
 
 - name: Gather the installed package facts
   ansible.builtin.package_facts:
-    manager: auto      
+    manager: auto
   when: ansible_os_family == "RedHat"
 
 - name: If FirewallD is installed then open 'http' port
-  ansible.posix.firewalld: 
+  ansible.posix.firewalld:
     service: http
     permanent: true
     state: enabled
   become: true
-  when:  ansible_os_family == "RedHat" and "'firewalld' in ansible_facts.packages"
+  when: ansible_os_family == "RedHat" and "'firewalld' in ansible_facts.packages"
 
 - name: Re-Start the Firewalld Service
   service: 
