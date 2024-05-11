@@ -1,11 +1,5 @@
 ---
-# defaults file for hammadrauf.ansible-role-apache2
-users:
-  - username: "{{ vault_vmuser1 }}"
-    password: "{{ vault_vmpwd1 }}"
-  - username: "{{ vault_vmuser2 }}"
-    password: "{{ vault_vmpwd2 }}"
-
+# defaults file for hammadrauf.apache2
 virtualhosts:
   - directory: "/var/www/html"
     contextroot: "/"

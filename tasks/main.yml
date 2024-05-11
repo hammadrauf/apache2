@@ -7,14 +7,6 @@
     - "os_specific_{{ ansible_os_family }}.yml"
     - "os_specific_default.yml"
 
-- name: Include secrets.yml
-  include_vars: "secrets.yml"
-
-- name: Repeat createuser block with loop
-  ansible.builtin.include_tasks: createuser.yml
-  with_items:
-    - "{{ users }}"
-
 - name: Install package Apache
   package:
     name: "{{ vapache }}"

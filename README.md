@@ -24,7 +24,7 @@ Example Playbook
 ```
     - hosts: servers
       roles:
-         - { role: hammadrauf.apache2 }
+         - role: hammadrauf.apache2
 ```
 
 Testing with Molecule
