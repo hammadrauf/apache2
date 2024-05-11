@@ -12,6 +12,22 @@ Role Variables
 --------------
 
 For a complete list please see defaults/main.yml.
+Optional ap2_file_* variables.
+  - ap2_file_index
+  - ap2_file_css
+  - ap2_file_ico
+```
+ap2_virtualhosts:
+  - directory: "/var/www/html"
+    contextroot: "/"
+    domainname: "www.abc.net"
+    port80: true
+    port443: true
+    port80redirect: true
+    ssl_enabled: true
+    ssl_self_signed: false
+    ssl_certbot: true
+```
 
 Dependencies
 ------------

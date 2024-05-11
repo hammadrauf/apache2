@@ -1,6 +1,10 @@
 ---
 # defaults file for hammadrauf.apache2
-virtualhosts:
+## Optional ap2_file_* variables.
+# ap2_file_index: /custom_files/index.html
+# ap2_file_css: /custom_files/mycss.css
+# ap2_file_ico: /custome_files/baloon.ico
+ap2_virtualhosts:
   - directory: "/var/www/html"
     contextroot: "/"
     domainname: "www.abc.net"

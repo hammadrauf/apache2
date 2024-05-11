@@ -36,6 +36,16 @@
   become: true
   when: apc.stat.exists
 
+- name: Copy the User-Provided index.html from Host to remote in the Apache Default Content folder
+  copy:
+    src: "{{ ap2_file_index }}"
+    dest: "{{ vapache_default_content }}/{{ ap2_file_index }}"
+    owner: "{{ vapache_user }}"
+    group: "{{ vapache_group }}"
+    mode: '0644'
+  become: true
+  when: apc.stat.exists and ap2_file_index is defined
+
 - name: Copy the included index.html from Host to remote in the Apache Default Content folder
   copy:
     src: index.html
@@ -44,7 +54,17 @@
     group: "{{ vapache_group }}"
     mode: '0644'
   become: true
-  when: apc.stat.exists
+  when: apc.stat.exists and ap2_file_index is not defined    
+
+- name: Copy the User-Provided site_styles.css from Host to remote in the Apache Default Content folder
+  copy:
+    src: "{{ ap2_file_css }}"
+    dest: "{{ vapache_default_content }}/{{ ap2_file_css }}"
+    owner: "{{ vapache_user }}"
+    group: "{{ vapache_group }}"
+    mode: '0644'
+  become: true
+  when: apc.stat.exists and ap2_file_css is defined
 
 - name: Copy the included site_styles.css from Host to remote in the Apache Default Content folder
   copy:
@@ -54,7 +74,17 @@
     group: "{{ vapache_group }}"
     mode: '0644'
   become: true
-  when: apc.stat.exists
+  when: apc.stat.exists and ap2_file_css is not defined
+
+- name: Copy the User-Defined icon from Host to remote in the Apache Default Content folder
+  copy:
+    src: "{{ ap2_file_ico }}"
+    dest: "{{ vapache_default_content }}/{{ ap2_file_ico }}"
+    owner: "{{ vapache_user }}"
+    group: "{{ vapache_group }}"
+    mode: '0644'
+  become: true
+  when: apc.stat.exists and ap2_file_ico is defined
 
 - name: Copy the included icon from Host to remote in the Apache Default Content folder
   copy:
@@ -64,7 +94,7 @@
     group: "{{ vapache_group }}"
     mode: '0644'
   become: true
-  when: apc.stat.exists
+  when: apc.stat.exists and ap2_file_ico is not defined
 
 - name: Re-Start the Apache Service.
   service:
