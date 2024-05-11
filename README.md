@@ -12,10 +12,15 @@ Role Variables
 --------------
 
 For a complete list please see defaults/main.yml.
-Optional ap2_file_* variables.
-  - ap2_file_index
-  - ap2_file_css
-  - ap2_file_ico
+
+Following are optional files or template for the Default home page.
+```
+ap2_template_index: ./some/path/index.html.j2
+ap2_file_css: ./some/path/site_style.css
+ap2_file_ico: ./some/path/favicon.ico
+```
+
+Following data Structure is a work in progress. To be implemented...
 ```
 ap2_virtualhosts:
   - directory: "/var/www/html"

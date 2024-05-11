@@ -9,59 +9,59 @@
 
 - name: Install package Apache
   package:
-    name: "{{ vapache }}"
+    name: "{{ ap2_vapache }}"
     state: present
   become: true
 
 - name: Enable the Apache Service, if not already done so
   service:
-    name: "{{ vapache_service }}"
+    name: "{{ ap2_vapache_service }}"
     enabled: true
   become: true
 
 - name: Start the Apache Service, if not already done so
   service:
-    name: "{{ vapache_service }}"
+    name: "{{ ap2_vapache_service }}"
     state: started
   become: true
 
 - name: Check if Apache Default Content folder exists
-  stat: path="{{ vapache_default_content }}"
+  stat: path="{{ ap2_vapache_default_content }}"
   register: apc
 
 - name: Delete the pre-packeged files from Apache Default Content folder
-  shell: "/usr/bin/rm -rf {{ vapache_default_content }}/* && /usr/bin/find {{ vapache_default_content }}/ -name '.*' ! -name '.' ! -name '..' -delete"
+  shell: "/usr/bin/rm -rf {{ ap2_vapache_default_content }}/* && /usr/bin/find {{ ap2_vapache_default_content }}/ -name '.*' ! -name '.' ! -name '..' -delete"
   args:
-    removes: "{{ vapache_default_content }}/index.html"
+    removes: "{{ ap2_vapache_default_content }}/index.html"
   become: true
   when: apc.stat.exists
 
-- name: Copy the User-Provided index.html from Host to remote in the Apache Default Content folder
-  copy:
-    src: "{{ ap2_file_index }}"
-    dest: "{{ vapache_default_content }}/index.html"
-    owner: "{{ vapache_user }}"
-    group: "{{ vapache_group }}"
+- name: Copy the User-Provided index.html.js from Host to remote in the Apache Default Content folder
+  ansible.builtin.template:
+    src: "{{ ap2_template_index }}"
+    dest: "{{ ap2_vapache_default_content }}/index.html"
+    owner: "{{ ap2_vapache_user }}"
+    group: "{{ ap2_vapache_group }}"
     mode: '0644'
   become: true
-  when: apc.stat.exists and ap2_file_index is defined
+  when: apc.stat.exists and ap2_template_index is defined
 
-- name: Copy the included index.html from Host to remote in the Apache Default Content folder
-  copy:
-    src: index.html
-    dest: "{{ vapache_default_content }}/index.html"
-    owner: "{{ vapache_user }}"
-    group: "{{ vapache_group }}"
+- name: Copy the included index.html.j2 from Host to remote in the Apache Default Content folder
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: "{{ ap2_vapache_default_content }}/index.html"
+    owner: "{{ ap2_vapache_user }}"
+    group: "{{ ap2_vapache_group }}"
     mode: '0644'
   become: true
-  when: apc.stat.exists and ap2_file_index is not defined    
+  when: apc.stat.exists and ap2_template_index is not defined    
 
 - name: Copy the User-Provided site_styles.css from Host to remote in the Apache Default Content folder
   copy:
     src: "{{ ap2_file_css }}"
-    dest: "{{ vapache_default_content }}/site_styles.css"
-    owner: "{{ vapache_user }}"
-    group: "{{ vapache_group }}"
+    dest: "{{ ap2_vapache_default_content }}/site_styles.css"
+    owner: "{{ ap2_vapache_user }}"
+    group: "{{ ap2_vapache_group }}"
     mode: '0644'
   become: true
   when: apc.stat.exists and ap2_file_css is defined
@@ -69,9 +69,9 @@
 - name: Copy the included site_styles.css from Host to remote in the Apache Default Content folder
   copy:
     src: site_styles.css
-    dest: "{{ vapache_default_content }}/site_styles.css"
-    owner: "{{ vapache_user }}"
-    group: "{{ vapache_group }}"
+    dest: "{{ ap2_vapache_default_content }}/site_styles.css"
+    owner: "{{ ap2_vapache_user }}"
+    group: "{{ ap2_vapache_group }}"
     mode: '0644'
   become: true
   when: apc.stat.exists and ap2_file_css is not defined
@@ -79,9 +79,9 @@
 - name: Copy the User-Defined icon from Host to remote in the Apache Default Content folder
   copy:
     src: "{{ ap2_file_ico }}"
-    dest: "{{ vapache_default_content }}/favicon.ico"
-    owner: "{{ vapache_user }}"
-    group: "{{ vapache_group }}"
+    dest: "{{ ap2_vapache_default_content }}/favicon.ico"
+    owner: "{{ ap2_vapache_user }}"
+    group: "{{ ap2_vapache_group }}"
     mode: '0644'
   become: true
   when: apc.stat.exists and ap2_file_ico is defined
@@ -89,16 +89,16 @@
 - name: Copy the included icon from Host to remote in the Apache Default Content folder
   copy:
     src: castle-icon.ico
-    dest: "{{ vapache_default_content }}/favicon.ico"
-    owner: "{{ vapache_user }}"
-    group: "{{ vapache_group }}"
+    dest: "{{ ap2_vapache_default_content }}/favicon.ico"
+    owner: "{{ ap2_vapache_user }}"
+    group: "{{ ap2_vapache_group }}"
     mode: '0644'
   become: true
   when: apc.stat.exists and ap2_file_ico is not defined
 
 - name: Re-Start the Apache Service.
   service:
-    name: "{{ vapache_service }}"
+    name: "{{ ap2_vapache_service }}"
     state: restarted
   become: true
   when: apc.stat.exists
