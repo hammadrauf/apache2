@@ -59,7 +59,7 @@
 - name: Copy the User-Provided site_styles.css from Host to remote in the Apache Default Content folder
   copy:
     src: "{{ ap2_file_css }}"
-    dest: "{{ vapache_default_content }}/{{ ap2_file_css }}"
+    dest: "{{ vapache_default_content }}/site_styles.css"
     owner: "{{ vapache_user }}"
     group: "{{ vapache_group }}"
     mode: '0644'
