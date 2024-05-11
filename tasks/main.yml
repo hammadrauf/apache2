@@ -39,7 +39,7 @@
 - name: Copy the User-Provided index.html from Host to remote in the Apache Default Content folder
   copy:
     src: "{{ ap2_file_index }}"
-    dest: "{{ vapache_default_content }}/{{ ap2_file_index }}"
+    dest: "{{ vapache_default_content }}/index.html"
     owner: "{{ vapache_user }}"
     group: "{{ vapache_group }}"
     mode: '0644'
@@ -79,7 +79,7 @@
 - name: Copy the User-Defined icon from Host to remote in the Apache Default Content folder
   copy:
     src: "{{ ap2_file_ico }}"
-    dest: "{{ vapache_default_content }}/{{ ap2_file_ico }}"
+    dest: "{{ vapache_default_content }}/favicon.ico"
     owner: "{{ vapache_user }}"
     group: "{{ vapache_group }}"
     mode: '0644'
