@@ -113,7 +113,7 @@
     mode: '0644'
   become: true
   when: >
-    (ap2_vapache_remove_default is not defined and
+    (ap2_vapache_remove_default is not defined or
     ap2_vapache_remove_default is false) and
     apc.stat.exists and
     ap2_file_ico is defined
@@ -127,7 +127,7 @@
     mode: '0644'
   become: true
   when: >
-    (ap2_vapache_remove_default is not defined
+    (ap2_vapache_remove_default is not defined or
     ap2_vapache_remove_default is false) and
     apc.stat.exists and
     ap2_file_ico is not defined
