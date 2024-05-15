@@ -33,14 +33,20 @@
   file:
     path: "{{ ap2_vapache_default_content }}" 
     state: absent
-  when: apc.stat.exists and ap2_vapache_remove_default is true
+  when: >
+    apc.stat.exists and
+    (ap2_vapache_remove_default is defined and
+    ap2_vapache_remove_default is true)
 
 - name: Delete the pre-packeged files from Apache Default Content folder
   shell: "/usr/bin/rm -rf {{ ap2_vapache_default_content }}/* && /usr/bin/find {{ ap2_vapache_default_content }}/ -name '.*' ! -name '.' ! -name '..' -delete"
   args:
     removes: "{{ ap2_vapache_default_content }}/index.html"
   become: true
-  when: apc.stat.exists and ap2_vapache_remove_default is false
+  when: >
+    apc.stat.exists and
+    (ap2_vapache_remove_default is not defined or
+    ap2_vapache_remove_default is false)
 
 - name: Copy the User-Provided index.html.js from Host to remote in the Apache Default Content folder
   ansible.builtin.template:
@@ -50,8 +56,12 @@
     group: "{{ ap2_vapache_group }}"
     mode: '0644'
   become: true
-  when: ap2_vapache_remove_default is false and apc.stat.exists and ap2_template_index is defined
-
+  when: >
+    (ap2_vapache_remove_default is not defined or
+    ap2_vapache_remove_default is false) and
+    apc.stat.exists and
+    ap2_template_index is defined
+    
 - name: Copy the included index.html.j2 from Host to remote in the Apache Default Content folder
   ansible.builtin.template:
     src: index.html.j2
@@ -60,7 +70,11 @@
     group: "{{ ap2_vapache_group }}"
     mode: '0644'
   become: true
-  when: ap2_vapache_remove_default is false and apc.stat.exists and ap2_template_index is not defined    
+  when: >
+    (ap2_vapache_remove_default is not defined or
+    ap2_vapache_remove_default is false) and
+    apc.stat.exists and
+    ap2_template_index is not defined    
 
 - name: Copy the User-Provided site_styles.css from Host to remote in the Apache Default Content folder
   copy:
@@ -70,7 +84,11 @@
     group: "{{ ap2_vapache_group }}"
     mode: '0644'
   become: true
-  when: ap2_vapache_remove_default is false and apc.stat.exists and ap2_file_css is defined
+  when: > 
+    (ap2_vapache_remove_default is not defined or
+    ap2_vapache_remove_default is false) and
+    apc.stat.exists and
+    ap2_file_css is defined
 
 - name: Copy the included site_styles.css from Host to remote in the Apache Default Content folder
   copy:
@@ -80,7 +98,11 @@
     group: "{{ ap2_vapache_group }}"
     mode: '0644'
   become: true
-  when: ap2_vapache_remove_default is false and apc.stat.exists and ap2_file_css is not defined
+  when: >
+    (ap2_vapache_remove_default is not defined or
+    ap2_vapache_remove_default is false) and
+    apc.stat.exists and
+    ap2_file_css is not defined
 
 - name: Copy the User-Defined icon from Host to remote in the Apache Default Content folder
   copy:
@@ -90,7 +112,11 @@
     group: "{{ ap2_vapache_group }}"
     mode: '0644'
   become: true
-  when: ap2_vapache_remove_default is false and apc.stat.exists and ap2_file_ico is defined
+  when: >
+    (ap2_vapache_remove_default is not defined and
+    ap2_vapache_remove_default is false) and
+    apc.stat.exists and
+    ap2_file_ico is defined
 
 - name: Copy the included icon from Host to remote in the Apache Default Content folder
   copy:
@@ -100,7 +126,11 @@
     group: "{{ ap2_vapache_group }}"
     mode: '0644'
   become: true
-  when: ap2_vapache_remove_default is false and apc.stat.exists and ap2_file_ico is not defined
+  when: >
+    (ap2_vapache_remove_default is not defined
+    ap2_vapache_remove_default is false) and
+    apc.stat.exists and
+    ap2_file_ico is not defined
 
 - name: Create Custom Content Folders from list if given
   debug:

@@ -6,4 +6,3 @@ ap2_vapache_config: /etc/httpd/conf/httpd.conf
 ap2_vapache_default_content: /var/www/html
 ap2_vapache_user: apache
 ap2_vapache_group: apache
-
