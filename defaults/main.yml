@@ -6,7 +6,7 @@
 # ap2_file_css: ./some/path/site_style.css
 # ap2_file_ico: ./some/path/favicon.ico
 ap2_vapache_remove_default: false
-ap2_vapache_custom_content: []
+ap2_list_custom_content_folders: []
 #
 ap2_virtualhosts:
   - directory: "/var/www/html"

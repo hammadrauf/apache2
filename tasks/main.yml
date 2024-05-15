@@ -141,7 +141,7 @@
   #   group: "{{ ap2_vapache_group }}"
   #   mode: '0644'
   # become: true
-  loop: "{{ items|flatten(levels=1) }}"
+  loop: "{{ ap2_list_custom_content_folders|flatten(levels=1) }}"
 
 - name: Re-Start the Apache Service.
   service:
