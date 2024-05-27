@@ -134,12 +134,12 @@
 
 - name: Create Custom Content Folders from list if given
   debug:
-    msg: "{{ item }}"
+    msg: " TODO create folders and Untar package into: {{ item }}"
   #   src: castle-icon.ico
   #   dest: "{{ ap2_vapache_default_content }}/favicon.ico"
   #   owner: "{{ ap2_vapache_user }}"
   #   group: "{{ ap2_vapache_group }}"
-  #   mode: '0644'
+  #   mode: '0640'
   # become: true
   loop: "{{ ap2_list_custom_content_folders|flatten(levels=1) }}"
 

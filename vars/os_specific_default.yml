@@ -4,6 +4,6 @@ ap2_vapache_service: apache2
 ap2_vapache_config_folder: /etc/apache2/sites-enabled
 ap2_vapache_config: /etc/apache2/apache2.conf
 ap2_vapache_default_content: /var/www/html
-ap2_vapache_user: www-data
-ap2_vapache_group: www-data
+ap2_vapache_user: "www-data"
+ap2_vapache_group: "www-data"
 
