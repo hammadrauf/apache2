@@ -171,6 +171,6 @@
   when: ansible_os_family == "RedHat" and "'firewalld' in ansible_facts.packages"
 
 - name: Perform apache-vhost configurations if vhost vars are defined
-  import_role:
+  include_role:
     name: hammadrauf.apache_vhosts
   when: apache_vhosts_defaults is defined and apache_vhosts is defined
