@@ -22,4 +22,6 @@ galaxy_info:
     - https
 
 dependencies:
-  - role: hammadrauf.apache_vhosts
+  - role: 
+      - name: hammadrauf.apache_vhosts
+        version: 0.1.7
