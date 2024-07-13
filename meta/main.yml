@@ -23,5 +23,5 @@ galaxy_info:
 
 dependencies:
   - role: 
-      - name: 'hammadrauf.apache_vhosts'
+      - name: 'hammadrauf.apachevhosts'
         version: 0.1.10
