@@ -22,7 +22,5 @@ galaxy_info:
     - https
 
 dependencies:
-  - role:
-      - name: apache_vhosts
-        namespace: hammadrauf
-        version: 0.1.10
+  - role: hammadrauf.apache_vhosts
+
