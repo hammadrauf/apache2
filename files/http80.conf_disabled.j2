@@ -1,0 +1,14 @@
+<VirtualHost '{{ ap2_address }}':80>
+        ServerAdmin webmaster@localhost
+        ServerName '{{  }}'
+        DocumentRoot '{{  }}'
+
+        ErrorLog ${APACHE_LOG_DIR}/'{{  }}'_error.log
+        CustomLog ${APACHE_LOG_DIR}/'{{  }}'_access.log combined
+
+        RedirectMatch permanent ^/(.*)$ https://'{{  }}'/$1
+
+        RewriteEngine on
+        RewriteCond %{SERVER_NAME} ='{{   }}'
+        RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+</VirtualHost>
