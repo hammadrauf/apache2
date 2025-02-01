@@ -22,5 +22,5 @@ galaxy_info:
     - https
 
 dependencies: []
-#  - role: hammadrauf.apache_vhosts
+ - role: hammadrauf.apache_vhosts
 
